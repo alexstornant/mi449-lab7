@@ -1,7 +1,18 @@
 ---
 layout: layout.liquid
-title: 11ty Boilerplate
+title: Lab 7
 ---
 
-<h1>Yet Another 11ty <strong>Boilerplate</strong></h1>
-<img alt="pine" src="/images/pine.png" width="50" />
+<div x-data="{ bitcoinPrice: '' }" x-init="fetch('https://api.coindesk.com/v1/bpi/currentprice.json')
+    .then(response => response.json())
+    .then(data => {
+        bitcoinPrice = data.bpi.USD.rate_float;
+    })">
+    <h1 class="text-4xl font-bold">Bitcoin</h1>
+    <div class="class="mt-100 mb-100"><span>The price of BTC currently in USD: $</span><span x-text="bitcoinPrice"></span><br></div>
+</div>
+
+<div x-data="{ dog: $fetchjson('https://dog.ceo/api/breeds/image/random', jsonItem='message')}">
+    <h1 class="text-4xl font-bold">Dogs</h1>
+    <img alt="Dog" x-bind:src="dog" class="rounded-lg mx-auto"/>
+</div>
